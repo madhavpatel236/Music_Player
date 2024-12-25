@@ -18,12 +18,11 @@ import Playlist from "./componenets/Playlist.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<Root />}>
-      <Route path="/" element={<App   />} />
-      <Route path="/home" element={<Home />} />
-
-      <Route path="/login" element={<Login />} />
-      <Route path="header" element={<Header />} />
+    <Route path="/" element={<App />}>
+      <Route path="/" element={<Home />} />
+{/* 
+      <Route path="/" element={<Header />} /> */}
+      <Route path="login" element={<Login />} />
       <Route path="playlist" element={<Playlist />} />
     </Route>
   )

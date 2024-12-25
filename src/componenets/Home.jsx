@@ -1,99 +1,111 @@
-// import React, { useEffect, useState } from "react";
-// import { useSelector } from "react-redux";
-// import axios from "axios";
-// import { useNavigate } from "react-router-dom";
-// import Playlist from "./Playlist";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import Playlist from "./Playlist";
 
-// function Home() {
-//   // const token = useSelector((store) => store?.token);
-//   const navigate = useNavigate();
-
-//   // const [playlists, setPlaylists] = useState([]);
-
-//   const handleClick = () => {
-//     navigate("/");
-//   };
-
-//   // const rapidAPI = async () => {
-//   //   const url =
-//   //     "https://spotify23.p.rapidapi.com/search/?q=arijit&type=multi&offset=0&limit=10&numberOfTopResults=5";
-
-//   //   const options = {
-//   //     method: "GET",
-//   //     headers: {
-//   //       "x-rapidapi-key": "f0a4b14204msh41c012695b40bfcp1a466ejsn39d3cbd66996",
-//   //       "x-rapidapi-host": "spotify23.p.rapidapi.com",
-//   //     },
-//   //   };
-//   //   try {
-//   //     const response = await fetch(url, options);
-//   //     const result = await response.json();
-//   //     console.log(result);
-//   //   } catch (error) {
-//   //     console.error(error);
-//   //   }
-//   // };
-
-//   // useEffect(() => {
-//   //   const fetchUserPlaylists = async () => {
-//   //     const options = {
-//   //       method: "GET",
-//   //       headers: {
-//   //         "x-rapidapi-key":
-//   //           "f0a4b14204msh41c012695b40bfcp1a466ejsn39d3cbd66996",
-//   //         "x-rapidapi-host": "spotify23.p.rapidapi.com",
-//   //       },
-//   //     };
-//   //     try {
-//   //       const response = await fetch(
-//   //         "https://spotifyuserapiserg-osipchukv1.p.rapidapi.com/getFeaturedPlaylists'",
-//   //         options
-//   //       );
-//   //       if (!response.ok) {
-//   //         throw new Error(`Error fetching playlists: ${response.statusText}`);
-//   //       }
-
-//   //       const data = await response.json();
-//   //       setPlaylists(data); // Adjust based on the API response structure
-//   //     } catch (err) {
-//   //       console.log(err);
-//   //     }
-//   //   };
-
-//   //   console.log(Playlist);
-//   //   fetchUserPlaylists();
-//   // }, []);
-
-//   // useEffect(() => {
-//   //   rapidAPI();
-//   // }, []);
-
-//   return (
-//     <div className="flex-col text-center  bg-red-950 w-auto h-[100vh]">
-//       <div className="text-white pt-64 mb-4 font-semibold font-serif text-4xl">
-//         Turn up the vibe
-//       </div>
-//       <button
-//         onClick={handleClick}
-//         className="text-white boder border shadow-white shadow-md p-2 rounded-xl  transition hover:scale-110"
-//       >
-//         Explore the Library
-//       </button>
-//     </div>
-//   );
-// }
-
-// export default Home;
-
-
-import React from 'react'
-
+import logo from "../images/logo.png";
 function Home() {
+  // const token = useSelector((store) => store?.token);
+
   return (
-    <div>
-      Home
+
+    <div className=" hidden md:flex md:text-white bg-red-950 w-auto h-[100vh]">
+      <section className="md:flex-col md:flex md: md:items-center  md:bg-black  md:w-3/12">
+        <section className="md:h-1/4 md:flex md:flex-col md:justify-between">
+          <div className="md:mt-10 md:mb-16">
+            <img
+              src={logo}
+              alt="logo"
+              className="md:w-16 md:h-16  md:rounded-full "
+            />
+          </div>
+          <div className="md:flex md:flex-col md:gap-2">
+            <div className="md:text-gray-500 md:items-start">MENU</div>
+            <button className="md:flex md:items-start">
+              <img src={logo} className="md:w-6" />
+              <span className="md:pl-4">Home</span>
+            </button>
+            <button className="md:flex md:items-start">
+              <img src={logo} className="md:w-6" />
+              <span className="md:pl-4">trends</span>
+            </button>
+            <button className="md:flex md:items-start">
+              <img src={logo} className="md:w-6" />
+              <span className="md:pl-4">Library</span>
+            </button>
+            <button className="md:flex md:items-start">
+              <img src={logo} className="md:w-6" />
+              <span className="md:pl-4">Discover</span>
+            </button>
+          </div>
+        </section>
+        <section className="md:h-3/4 md:mb-10 md:flex md:flex-col md:justify-end gap-3">
+          <div className="md:hover:underline">Setting</div>
+          <div className="md:hover:underline">Logout</div>
+        </section>
+      </section>
+
+      <section>
+        <div></div>
+      </section>
     </div>
-  )
+  );
 }
 
-export default Home
+export default Home;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import React from 'react'
+
+// function Home() {
+//   return (
+// <div className="flex-col text-center  bg-red-950 w-auto h-[100vh]">
+//   <div className="text-white pt-64 mb-4 font-semibold font-serif text-4xl">
+//     Turn up the vibe
+//   </div>
+//   <button
+//     onClick={handleClick}
+//     className="text-white boder border shadow-white shadow-md p-2 rounded-xl  transition hover:scale-110"
+//   >
+//     Explore the Library
+//   </button>
+// </div>
+//   )
+// }
+
+// export default Home
