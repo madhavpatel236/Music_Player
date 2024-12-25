@@ -8,7 +8,6 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
-import Root from "./Root.jsx";
 import Home from "./componenets/Home.jsx";
 import { Provider } from "react-redux";
 import store from "./utils/store.js";

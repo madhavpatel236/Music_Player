@@ -3,7 +3,6 @@ import Login from "./componenets/Login";
 import { useDispatch, useSelector } from "react-redux";
 import { tokenAdd } from "./utils/Slice/tokenSlice";
 import Home from "./componenets/Home";
-import Root from "./Root";
 import store from "./utils/store";
 import { Provider } from "react-redux";
 import { Outlet, Route, useNavigate } from "react-router-dom";
@@ -24,7 +23,7 @@ function App() {
       }
     }
   }, [token, dispatch]);
-  console.log(token);
+  // console.log(token);
 
   return (
     <div>

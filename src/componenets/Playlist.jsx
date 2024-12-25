@@ -3,7 +3,7 @@ import logo from "../images/logo.png";
 
 function Playlist() {
   return (
-    <div className="md:flex md:text-white bg-red-950 w-auto h-[100vh]">
+    <div className="hidden md:flex md:text-white bg-red-950 w-auto h-[100vh]">
       <section className="md:flex-col md:flex md: md:items-center  md:bg-black  md:w-3/12">
         <section className="md:h-1/4 md:flex md:flex-col md:justify-between">
           <div className="md:mt-10 md:mb-16">

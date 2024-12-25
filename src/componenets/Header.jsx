@@ -4,7 +4,7 @@ import logo from '../images/logo.png'
 
 function Header() {
   return (
-    <div className='md:hidden flex justify-between items-center h-14 bg-black text-white '>
+    <div className='md:hidden flex max-w-[100vw] justify-between items-center h-14 bg-black text-white '>
       <section className='ml-3'>
         <img src={logo} alt='' className='w-8 h-8 rounded-full' />
       </section>
