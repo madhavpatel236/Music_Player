@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
-import tokenSlice from './Slice/tokenSlice'
+import tokenResucers from './Slice/tokenSlice'
 
-    const appStore = configureStore({
+    const store = configureStore({
         reducer: {
-            token: tokenSlice
+            token: tokenResucers,
         },
     })
 
-export default appStore;
+export default store;
