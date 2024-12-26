@@ -14,15 +14,15 @@ import store from "./utils/store.js";
 import Login from "./componenets/Login.jsx";
 import Header from "./componenets/Header.jsx";
 import Playlist from "./componenets/Playlist.jsx";
+import ComingSoonPage from "./componenets/ComingSoonPage.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
       <Route path="/" element={<Home />} />
-{/* 
-      <Route path="/" element={<Header />} /> */}
       <Route path="login" element={<Login />} />
       <Route path="playlist" element={<Playlist />} />
+      <Route path="comingsoon" element={<ComingSoonPage />} />
     </Route>
   )
 );

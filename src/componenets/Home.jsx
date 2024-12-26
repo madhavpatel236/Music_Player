@@ -8,13 +8,15 @@ import pauseBtn from "../images/playBtn.png";
 import ContentPage from "./ContentPage";
 import AudioCard from "./AudioCard";
 import { addPlaylist } from "../utils/Slice/userPlaylistSlice";
+import { Link } from "react-router-dom";
 
 function Home() {
   const dispatch = useDispatch();
 
   const token = useSelector((store) => store?.token?.tokenData);
 
-  const selector = useSelector((store) => store.userPlaylists.userPlaylist);
+  const playlist = useSelector((store) => store.userPlaylists.userPlaylist);
+  console.log(playlist)
   const [playlistData, setPlaylistData] = useState([]);
   const [songs, setSongs] = useState([]);
 
@@ -78,22 +80,22 @@ function Home() {
             </div>
             <div className="md:flex md:flex-col md:gap-2">
               <div className="md:text-gray-500 md:items-start">MENU</div>
-              <button className="md:flex md:items-start">
+              <Link to='/commingsoon' className="md:flex md:items-start">
                 <img src={logo} className="md:w-6" />
                 <span className="md:pl-4">Home</span>
-              </button>
-              <button className="md:flex md:items-start">
+              </Link>
+              <Link to='/commingsoon' className="md:flex md:items-start">
                 <img src={logo} className="md:w-6" />
                 <span className="md:pl-4">trends</span>
-              </button>
-              <button className="md:flex md:items-start">
+              </Link>
+              <Link to='/commingsoon' className="md:flex md:items-start">
                 <img src={logo} className="md:w-6" />
                 <span className="md:pl-4">Library</span>
-              </button>
-              <button className="md:flex md:items-start">
+              </Link>
+              <Link to='/commingsoon' className="md:flex md:items-start">
                 <img src={logo} className="md:w-6" />
                 <span className="md:pl-4">Discover</span>
-              </button>
+              </Link>
             </div>
           </section>
           <section className="md:h-3/4 md:mb-10 md:flex md:flex-col md:justify-end gap-3">
@@ -113,6 +115,7 @@ function Home() {
 
       {/* mobile screen */}
       <div className="md:hidden bg-red-800 flex flex-col pt-5 flex-wrap justify-start items-center gap-3 w-[100vw] min-h-[100vh]">
+        {/* img */}
         <article className="w-60 h-60 mt-3">
           <img
             src={playlistPhoto}
@@ -121,6 +124,7 @@ function Home() {
           />
         </article>
 
+{/* playlistName */}
         <article className="text-white mt-3 mb-2 font-bold text-2xl">
           <div>{playlistName}</div>
         </article>
@@ -131,34 +135,35 @@ function Home() {
           <img src={nextBtn} className="w-14 h-14" />
         </article>
 
+{/* list of songs */}
         <article className="bg-red-950 p-3 flex flex-col h-auto rounded-xl text-white max-w-[90vw]">
           {songs.map((eachSong) => (
-            // console.log(eachSong?.track?.album?.images[0].url)
+            console.log()
 
-            <button
-              key={eachSong?.track?.id}
-              className="flex bottom-0 gap-3 mb-4 "
-            >
-              <img
-                src={eachSong?.track?.album?.images[0].url}
-                className="w-10 h-10x rounded-md mr-3"
-              />
-              <span className="flex justify-between w-full p-1 ">
-                <span className="flex flex-col text-start">
-                  <span className=" line-clamp-1 font-semibold ">
-                    {eachSong?.track?.name}
-                  </span>
-                  <span className=" line-clamp-1 text-sm ">
-                    {eachSong?.track?.artists[0].name}
-                  </span>
-                </span>
-                <span className="mr-2 flex items-end mb-1 min-w-16">
-                  {(eachSong?.track?.duration_ms / 60000).toFixed(2) +
-                    " " +
-                    "min"}
-                </span>
-              </span>
-            </button>
+            // <button
+            //   key={eachSong?.track?.id}
+            //   className="flex bottom-0 gap-3 mb-4  "
+            // >
+            //   <img
+            //     src={eachSong?.track?.album?.images[0].url}
+            //     className="w-10 h-10x rounded-md mr-3"
+            //   />
+            //   <span className="flex justify-between w-full p-1 ">
+            //     <span className="flex flex-col text-start">
+            //       <span className=" line-clamp-1 font-semibold ">
+            //         {eachSong?.track?.name}
+            //       </span>
+            //       <span className=" line-clamp-1 text-sm ">
+            //         {eachSong?.track?.artists[0].name}
+            //       </span>
+            //     </span>
+            //     <span className="mr-2 flex items-end mb-1 min-w-16">
+            //       {(eachSong?.track?.duration_ms / 60000).toFixed(2) +
+            //         " " +
+            //         "min"}
+            //     </span>
+            //   </span>
+            // </button>
           ))}
         </article>
       </div>

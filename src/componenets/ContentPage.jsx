@@ -45,10 +45,10 @@ function ContentPage(playlist) {
     <div className="md:bg-red-950 md:md:w-auto md:flex-col md:flex ">
       {/* nav */}
       <section className="w-auto flex justify-evenly  md:mt-6  md:p-4">
-        <Link className="pt-1">Music</Link>
-        <Link className="pt-1">Podcast</Link>
-        <Link className="pt-1">Live</Link>
-        <Link className="pt-1">Radio</Link>
+        <Link to='/comingsoon' className="pt-1">Music</Link>
+        <Link to='/comingsoon' className="pt-1">Podcast</Link>
+        <Link to='/comingsoon' className="pt-1">Live</Link>
+        <Link to='/comingsoon' className="pt-1">Radio</Link>
         <input
           placeholder="search"
           className="md:bg-red-950  border pl-5 w-52 border-white p-1 rounded-full"
@@ -86,7 +86,7 @@ function ContentPage(playlist) {
       </section>
       <section>
         <div className="  md:p-2 md:flex md:text-gray-400">
-          <span className="md:text-start w-1/12   ">#</span>
+          <span className="md:text-center w-1/12   ">#</span>
           <span className="md:text-start w-5/12  ">TITLE</span>
           <span className="w-3/12  md:pl-3">ALBUM</span>
           <span className="w-3/12  flex justify-center">DURATION</span>
@@ -105,7 +105,7 @@ function ContentPage(playlist) {
             //   selectedButton === eachSong?.track?.id
             //     && "bg-black
           >
-            <span className="md:text-start w-1/12  ">{index + 1}</span>
+            <span className="md:text-center w-1/12  ">{index + 1}</span>
             <span className="hidden md:text-start md:flex  md:w-5/12  ">
               <img
                 src={`${eachSong?.track?.album?.images[0]?.url}`}
