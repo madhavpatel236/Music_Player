@@ -4,7 +4,7 @@ function Login() {
 
   const handleClick = async () => {
     const client_id = "ad72028e41d549128a554688bdf2acb0";
-    const redirect_uri = "http://localhost:5173/";
+    const redirect_uri = "https://madhav-music-player.netlify.app/";
     const api_uri = "https://accounts.spotify.com/authorize";
     const scope = [
       "user-read-private",
