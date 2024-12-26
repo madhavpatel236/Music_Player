@@ -63,7 +63,7 @@ function Home() {
 
   // highlight color for selected song
 
-  const [select, setSelect] = useSelector();
+  const [select, setSelect] = useState();
 
   useEffect(() => {
     data();

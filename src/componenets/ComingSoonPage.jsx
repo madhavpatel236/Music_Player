@@ -3,8 +3,8 @@ import come from '../images/come.jpeg'
 
 function ComingSoonPage() {
   return (
-    <div>
-      <img src={come} className='w-screen h-screen' />
+    <div className='flex justify-center'>
+      <img src={come} className='w-[50vw] h-[50vh]' />
     </div>
   )
 }
