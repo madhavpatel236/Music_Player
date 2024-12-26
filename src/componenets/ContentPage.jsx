@@ -3,6 +3,8 @@ import { Link, useSearchParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { showsongID } from "../utils/Slice/songIDSlice.js";
 import AudioCard from "./AudioCard.jsx";
+import { showSongInfo } from "../utils/Slice/currentSongInfoSlice.js";
+import axios from "axios";
 
 function ContentPage(playlist) {
   const data = playlist;
@@ -12,8 +14,24 @@ function ContentPage(playlist) {
   const dispatch = useDispatch();
   const songid = useSelector((store) => store.songID.ID);
 
+  const token = useSelector((store) => store?.token?.tokenData);
+
   const handleMusic = (id) => {
     dispatch(showsongID(id));
+    fetchSongFromID();
+  };
+
+  const fetchSongFromID = async () => {
+    console.log("api call");
+    const data = await axios.get(
+      `https://api.spotify.com/v1/tracks/${songid}`,
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      }
+    );
+    dispatch(showSongInfo(data?.data));
   };
 
   useEffect(() => {
@@ -100,4 +118,3 @@ function ContentPage(playlist) {
 }
 
 export default ContentPage;
-  

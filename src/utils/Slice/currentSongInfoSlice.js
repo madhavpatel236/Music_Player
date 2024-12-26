@@ -1,7 +1,7 @@
 import { createSlice, current } from "@reduxjs/toolkit";
 
 const currentSongInfoSlice = createSlice({
-  name: "songID",
+  name: "currentSongInfo",
   initialState:{
     apiData:{}, 
   },

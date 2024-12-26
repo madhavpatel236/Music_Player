@@ -1,33 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { showSongInfo } from "../utils/Slice/currentSongInfoSlice.js";
 
 function AudioCard() {
-  // const [songData, setSongData] = useState()
-  const token = useSelector((store) => store?.token?.tokenData);
-  const songID = useSelector((store) => store?.songID?.ID);
-  const songInfo = useSelector((store) => store?.currentSongInfo?.apiData) 
-  const dispatch = useDispatch()
-  
-  const fetchData = async () => {
-    const data = await axios.get(
-      `https://api.spotify.com/v1/tracks/${songID}`,
-      {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      }
-    );
-    // setSongData(data);
-    dispatch(showSongInfo(data))
-    
-  };
-  
-  console.log('musicInfo : ' + songInfo)
-  useEffect(() => {
-    fetchData();
-  },[]);
+  const songInfo = useSelector((store) => store.currentSongInfo.apiData);
+  console.log(songInfo);
 
   return (
     // <!-- component -->
@@ -35,14 +12,21 @@ function AudioCard() {
       <div class="bg-white p-8 rounded-lg shadow-md w-80">
         {/* <!-- Album Cover --> */}
         <img
-          src=""
+          src={songInfo?.album?.images[1]?.url}
           alt="idk - Highvyn, Taylor Shin"
           class="w-64 h-64 mx-auto rounded-lg mb-4 shadow-lg shadow-teal-50"
         />
         {/* <!-- Song Title --> */}
-        <h2 class="text-xl font-semibold text-center">idk</h2>
+        <h2 class="text-xl font-semibold text-black text-center">
+          {songInfo?.name}
+        </h2>
         {/* <!-- Artist Name --> */}
-        <p class="text-gray-600 text-sm text-center">Highvyn, Taylor Shin</p>
+        <p class="text-gray-600 text-sm line-clamp-2 text-center">
+          {songInfo?.artists?.map((eachArtist) => 
+            // console.log(eachArtist)
+            <span className=""> {eachArtist?.name + " | "}   </span>
+            )}
+        </p>
         {/* <!-- Music Controls --> */}
         <div class="mt-6 flex justify-center items-center">
           <button class="p-3 rounded-full bg-gray-200 hover:bg-gray-300 focus:outline-none">
