@@ -1,15 +1,27 @@
-import React from "react";
-
-import { Link } from "react-router-dom";
-import logo from "../images/logo.png";
+import React, { useEffect, useState } from "react";
+import { Link, useSearchParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { showsongID } from "../utils/Slice/songIDSlice.js";
+import AudioCard from "./AudioCard.jsx";
 
 function ContentPage(playlist) {
   const data = playlist;
-  //   console.log(data.playlistSongs);
+  // console.log(data.playlistSongs[9].track.id);
   const playlistPhoto = data?.playlist[0]?.images[0]?.url;
 
+  const dispatch = useDispatch();
+  const songid = useSelector((store) => store.songID.ID);
+
+  const handleMusic = (id) => {
+    dispatch(showsongID(id));
+  };
+
+  useEffect(() => {
+    handleMusic();
+  }, []);
+
   return (
-    <div className="md:bg-red-950 md:w-9/12 md:flex-col md:flex ">
+    <div className="md:bg-red-950 md:md:w-auto md:flex-col md:flex ">
       {/* nav */}
       <section className="w-auto flex justify-evenly  md:mt-6  md:p-4">
         <Link className="pt-1">Music</Link>
@@ -22,10 +34,10 @@ function ContentPage(playlist) {
         />
       </section>
 
-      {/* photos  */}
-      <section className="md:flex md:mt-10 md:justify-center  ">
+      {/* playlist photos */}
+      <section className="md:flex md:mt-10 xl:mt-4 md:justify-center  ">
         <section
-          className="md:relative  md:bg-cover md:bg-center md:shadow-md md:shadow-current md:h-80 md:w-10/12 md:flex md:rounded-2xl md:items-center md:justify-center md:text-white"
+          className="md:relative  md:bg-cover md:bg-center md:shadow-md md:shadow-current md:h-80 xl:h-52 md:w-10/12 xl:w-6/12 md:flex md:rounded-2xl md:items-center md:justify-center md:text-white"
           style={{
             backgroundImage: `url(${playlistPhoto})`,
           }}
@@ -43,7 +55,7 @@ function ContentPage(playlist) {
       </section>
 
       {/* songs list */}
-      <section className="md:mt-7 md:mb-6">
+      <section className="md:mt-7 xl:mt-4 xl:mb-4 md:mb-6">
         <article className="md:bg-red-950  md:flex md:flex-col  md:rounded-xl md:text-white ">
           {/* Playlist name  */}
           <div className="md:font-bold md:ml-2 md:text-2xl">
@@ -61,74 +73,31 @@ function ContentPage(playlist) {
         <div className="w-auto border border-gray-500"></div>
 
         {data.playlistSongs.map((eachSong, index) => (
-          // console.log(index+1)
-          <div className="md:w-full text- md:mt-3 p-2 md:flex md:justify-between">
+          // console.log(eachSong?.track?.id)
+          <button
+            onClick={() => handleMusic(eachSong?.track?.id)}
+            className="md:w-full xl:hover:bg-red-900 text- md:mt-3 p-2 md:flex md:justify-between"
+          >
             <span className="md:text-start w-1/12  ">{index + 1}</span>
             <span className="hidden md:text-start md:flex  md:w-5/12  ">
               <img
                 src={`${eachSong?.track?.album?.images[0]?.url}`}
-                className="hidden lg:w-16 lg:h-16"
+                className="hidden xl:w-16 xl:h-16"
               />
               <span className="md:line-clamp-1">{eachSong?.track?.name}</span>
             </span>
-            <span className="w-3/12  md:line-clamp-1 pl-3">
+            <span className="w-3/12 xl:text-start  md:line-clamp-1 pl-3">
               {eachSong?.track?.album?.name}
             </span>
             <span className="w-3/12  flex justify-center">
               {(eachSong?.track?.duration_ms / 60000).toFixed(2) + " " + "min"}
             </span>
-          </div>
+          </button>
         ))}
       </section>
-
     </div>
   );
 }
 
 export default ContentPage;
-
-// {
-//   data?.playlistSongs?.map((eachSong, index) => {
-//     // <div>  {index} </div>
-//     console.log(index + 1);
-//   });
-// }
-
-// {
-//   /* song heading */
-// }
-// <div className="md:w-full bg-gray-600 md:mt-3 md:ml-6 p-2 md:flex md:justify-between">
-//   <span className="md:text-start w-2/12 bg-pink-600 ">#</span>
-//   <span className="md:text-start w-4/12 bg-pink-200 ">TITLE</span>
-//   <span className="w-3/12 bg-blue-600">ALBUM</span>
-//   <span className="w-3/12 bg-orange-700">DURATION</span>
-// </div>;
-
-// {
-//   /* song */
-// }
-// <div className="md:ml-6 md:mt-3">
-//   {data.playlistSongs.map((eachSong, index) => (
-//     // console.log((eachSong?.track?.duration_ms)/60000)
-//     <button className=" md:mb-6 md:w-full md:justify-between md:flex ">
-//       <span className="md:text-start md:pl-3 md:text-xl md:w-2/12 ">
-//         {index + 1}
-//       </span>
-//       <span className=" md:line-clamp-1 md:text-start md:flex md:justify-start text-start md:w-4/12 ">
-//         <img
-//           src={`${eachSong?.track?.album?.images[0]?.url}`}
-//           className="md:w-14 md:h-14"
-//         />
-//         <span className="md:line-clamp-1 md:pl-3 ">
-//           {eachSong?.track?.name}
-//         </span>
-//       </span>
-//       <span className="  md:text-start md:justify-center md:pl-20 md:w-3/12">
-//         {eachSong?.track?.album?.name}
-//       </span>
-//       <span className=" md:text-end md:w-3/12">
-//         {(eachSong?.track?.duration_ms / 60000).toFixed(2) + " " + "min"}
-//       </span>
-//     </button>
-//   ))}
-// </div>;
+  

@@ -6,6 +6,7 @@ import nextBtn from "../images/nextBtn.png";
 import prevBtn from "../images/previousBtn.png";
 import pauseBtn from "../images/playBtn.png";
 import ContentPage from "./ContentPage";
+import AudioCard from "./AudioCard";
 
 function Home() {
   const dispatch = useDispatch();
@@ -60,11 +61,11 @@ function Home() {
   // console.log(songs);
 
   return (
-    <div>
-      {/* tablet screen */}
-      <div className="hidden md:text-white md:flex md:w-screen md:min-h-screen md:bg-black ">
+    <div className="">
+      {/* tablet and laptop screen  */}
+      <div className="hidden md:text-white md:flex md:w-screen md:min-h-screen md:bg-red-950 ">
         {/* left side navigation bar */}
-        <section className="  md:flex-col md:flex md: md:items-center md:h-screen md:bg-black  md:w-3/12">
+        <section className="md:flex-col md:flex md: md:items-center md:h-screen md:bg-black  md:w-2/12">
           <section className="md:h-1/4 md:flex md:flex-col md:justify-between">
             <div className="md:mt-10 md:mb-16">
               <img
@@ -98,12 +99,16 @@ function Home() {
             <div className="md:hover:underline">Logout</div>
           </section>
         </section>
-        {/* middle part of the HOme screen */}
+        {/* middle part of the Home screen */}
         <ContentPage playlist={playlistData} playlistSongs={songs} />
+
         {/* right side of the screen media player */}
+      <section className="xl:flex-col xl:flex xl xl:items-center xl:h-screen xl:bg-red-950  xl:w-3/12">
+        <AudioCard />
+      </section>
       </div>
 
-        {/* mobile screen */}
+      {/* mobile screen */}
       <div className="md:hidden bg-red-800 flex flex-col pt-5 flex-wrap justify-start items-center gap-3 w-[100vw] min-h-[100vh]">
         <article className="w-60 h-60 mt-3">
           <img
@@ -154,6 +159,8 @@ function Home() {
           ))}
         </article>
       </div>
+
+        
     </div>
   );
 }

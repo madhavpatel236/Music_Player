@@ -8,7 +8,7 @@ function Header() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="md:hidden bg-black max-w-screen-sm text-white">
+    <nav className="md:hidden bg-black max-w-screen text-white">
       <div className="flex justify-between items-center p-4">
       <section className='ml-3'>
         <img src={logo} alt='' onClick={<Home />} className='w-8 h-8 rounded-full' />
