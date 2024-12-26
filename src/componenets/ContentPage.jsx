@@ -10,19 +10,22 @@ function ContentPage(playlist) {
   const data = playlist;
   // console.log(data.playlistSongs[9].track.id);
   const playlistPhoto = data?.playlist[0]?.images[0]?.url;
+  const [selectedButton, setSelectedButton] = useState(null);
 
   const dispatch = useDispatch();
   const songid = useSelector((store) => store.songID.ID);
-
   const token = useSelector((store) => store?.token?.tokenData);
+  const songInfo = useSelector((store) => store.currentSongInfo.apiData);
+  console.log(songid);
 
   const handleMusic = (id) => {
-    dispatch(showsongID(id));
     fetchSongFromID();
+    setSelectedButton(id);
+    dispatch(showsongID(id));
   };
 
   const fetchSongFromID = async () => {
-    console.log("api call");
+    // console.log("api call");
     const data = await axios.get(
       `https://api.spotify.com/v1/tracks/${songid}`,
       {
@@ -94,7 +97,13 @@ function ContentPage(playlist) {
           // console.log(eachSong?.track?.id)
           <button
             onClick={() => handleMusic(eachSong?.track?.id)}
-            className="md:w-full xl:hover:bg-red-900 text- md:mt-3 p-2 md:flex md:justify-between"
+            className={`md:w-full xl:hover:bg-red-900 m text- md:mt-3 p-2 md:flex md:justify-between  " // Active button styles
+                 // Default button styles
+            }`}
+
+            // ${
+            //   selectedButton === eachSong?.track?.id
+            //     && "bg-black
           >
             <span className="md:text-start w-1/12  ">{index + 1}</span>
             <span className="hidden md:text-start md:flex  md:w-5/12  ">
@@ -104,7 +113,7 @@ function ContentPage(playlist) {
               />
               <span className="md:line-clamp-1">{eachSong?.track?.name}</span>
             </span>
-            <span className="w-3/12 xl:text-start  md:line-clamp-1 pl-3">
+            <span className="w-3/12 xl:text-start md:text-start  md:line-clamp-1 pl-3">
               {eachSong?.track?.album?.name}
             </span>
             <span className="w-3/12  flex justify-center">

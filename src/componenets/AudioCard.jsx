@@ -1,18 +1,58 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import logo from "../images/logo.png";
+import { showSongInfo } from "../utils/Slice/currentSongInfoSlice";
+import { showsongID } from "../utils/Slice/songIDSlice";
 
 function AudioCard() {
+  const [musicIndex, setMusicIndex] = useState();
+  const [currentMusicIndex, setCurrentMusicIndex] = useState(false);
   const songInfo = useSelector((store) => store.currentSongInfo.apiData);
-  console.log(songInfo);
+  const dispatch = useDispatch();
+
+  // console.log(currentMusic?.id)
+
+  const currentPlaylist = useSelector(
+    (store) => store.userPlaylists.userPlaylist
+  );
+  // console.log(songInfo);
+  // console.log(currentPlaylist);
+
+  const handlePrevBtn = () => {
+    const currentIndex = currentPlaylist.findIndex(
+      (currentPlaylist) => currentPlaylist.id === songInfo.id
+    );
+    // console.log("currentIndex: " + currentIndex);
+    const prevIndex = currentIndex > 0 && currentIndex - 1; // Loop back to the last track if at the beginning
+    // console.log("prevIndex: " + prevIndex);
+    setMusicIndex(prevIndex);
+    // console.log("index: " + musicIndex);
+    dispatch(showSongInfo(currentPlaylist[prevIndex]));
+  };
+
+  const handlenextBtn = () => {
+    const currentIndex = currentPlaylist.findIndex(
+      (currentPlaylist) => currentPlaylist.id === songInfo.id
+    );
+    const nextIndex = currentIndex > 0 && currentIndex + 1; // Loop back to the last track if at the beginning
+    setMusicIndex(nextIndex);
+    // console.log("index: " + musicIndex);
+    dispatch(showSongInfo(currentPlaylist[nextIndex]));
+  };
+    const currentMusic = useSelector((store) => store?.currentSongInfo?.apiData);
+  console.log(currentMusic);
+  const currentMusicID = currentMusic?.id;
+
+  dispatch(showsongID(currentMusicID));
 
   return (
     // <!-- component -->
     <div class=" fixed bg-red-950 mr-12 flex justify-center items-center h-screen">
       <div class="bg-white p-8 rounded-lg shadow-md w-80">
-        {/* <!-- Album Cover --> */}
+        {/* <!-- Album Cover (image) --> */}
         <img
-          src={songInfo?.album?.images[1]?.url}
+          src={songInfo?.album?.images[1]?.url || logo}
           alt="idk - Highvyn, Taylor Shin"
           class="w-64 h-64 mx-auto rounded-lg mb-4 shadow-lg shadow-teal-50"
         />
@@ -22,21 +62,25 @@ function AudioCard() {
         </h2>
         {/* <!-- Artist Name --> */}
         <p class="text-gray-600 text-sm line-clamp-2 text-center">
-          {songInfo?.artists?.map((eachArtist) => 
+          {songInfo?.artists?.map((eachArtist) => (
             // console.log(eachArtist)
-            <span className=""> {eachArtist?.name + " | "}   </span>
-            )}
+            <span className=""> {eachArtist?.name + " | "} </span>
+          ))}
         </p>
         {/* <!-- Music Controls --> */}
         <div class="mt-6 flex justify-center items-center">
-          <button class="p-3 rounded-full bg-gray-200 hover:bg-gray-300 focus:outline-none">
+          {/* prev Btn */}
+          <button
+            onClick={() => handlePrevBtn()}
+            class="p-3 rounded-full bg-gray-200 hover:bg-gray-300 focus:outline-none"
+          >
             <svg
               width="64px"
               height="64px"
               viewBox="0 0 24 24"
               class="w-4 h-4 text-gray-600"
               fill="none"
-              xmlns="http://www.w3.org/2000/svg"
+              // xmlns="http://www.w3.org/2000/svg"
               transform="matrix(-1, 0, 0, 1, 0, 0)"
             >
               <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -84,7 +128,10 @@ function AudioCard() {
               </g>
             </svg>
           </button>
-          <button class="p-3 rounded-full bg-gray-200 hover:bg-gray-300 focus:outline-none">
+          <button
+            onClick={() => handlenextBtn()}
+            class="p-3 rounded-full bg-gray-200 hover:bg-gray-300 focus:outline-none"
+          >
             <svg
               width="64px"
               height="64px"
@@ -113,14 +160,14 @@ function AudioCard() {
           </button>
         </div>
         {/* <!-- Progress Bar --> */}
-        <div class="mt-6 bg-gray-200 h-2 rounded-full">
+        {/* <div class="mt-6 bg-gray-200 h-2 rounded-full">
           <div class="bg-teal-500 h-2 rounded-full w-1/2"></div>
-        </div>
+        </div> */}
         {/* <!-- Time Information --> */}
-        <div class="flex justify-between mt-2 text-sm text-gray-600">
+        {/* <div class="flex justify-between mt-2 text-sm text-gray-600">
           <span>1:57</span>
           <span>3:53</span>
-        </div>
+        </div> */}
       </div>
     </div>
   );

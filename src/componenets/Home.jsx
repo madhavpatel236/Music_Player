@@ -7,6 +7,7 @@ import prevBtn from "../images/previousBtn.png";
 import pauseBtn from "../images/playBtn.png";
 import ContentPage from "./ContentPage";
 import AudioCard from "./AudioCard";
+import { addPlaylist } from "../utils/Slice/userPlaylistSlice";
 
 function Home() {
   const dispatch = useDispatch();
@@ -16,8 +17,6 @@ function Home() {
   const selector = useSelector((store) => store.userPlaylists.userPlaylist);
   const [playlistData, setPlaylistData] = useState([]);
   const [songs, setSongs] = useState([]);
-
-  console.log(songs);
 
   const data = async () => {
     const responce = await axios.get(
@@ -46,7 +45,10 @@ function Home() {
     );
     const songs = data?.data?.tracks?.items;
     setSongs(songs);
-    // console.log(songs);
+    const listOfSongData = songs.map((eachSongData) =>
+      // console.log(eachSongData?.track)
+      dispatch(addPlaylist(eachSongData?.track))
+    );
   };
 
   const playlistPhoto = playlistData[0]?.images[1]?.url;
@@ -99,13 +101,14 @@ function Home() {
             <div className="md:hover:underline">Logout</div>
           </section>
         </section>
+
         {/* middle part of the Home screen */}
         <ContentPage playlist={playlistData} playlistSongs={songs} />
 
         {/* right side of the screen media player */}
-      <section className="xl:flex-col xl:flex xl xl:items-center xl:h-screen xl:bg-red-950  xl:w-3/12">
-        <AudioCard />
-      </section>
+        <section className="xl:flex-col xl:mr-10 xl:flex xl xl:items-center xl:h-screen xl:bg-red-950  xl:w-3/12">
+          <AudioCard />
+        </section>
       </div>
 
       {/* mobile screen */}
@@ -159,8 +162,6 @@ function Home() {
           ))}
         </article>
       </div>
-
-        
     </div>
   );
 }

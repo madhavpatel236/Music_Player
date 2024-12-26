@@ -1,17 +1,16 @@
 import { createSlice, current } from "@reduxjs/toolkit";
 
 const userPlaylistSlice = createSlice({
-    name: "token",
+    name: "userPlaylists",
     initialState: {
         userPlaylist: []
     },
     reducers: {
         addPlaylist: (state, action) => {
-            state.userPlaylist.push(action.payload);
+            state.userPlaylist.push(action.payload)
+
         },
-        tokenRemove: (state, action) => {
-            return { tokenData: [] }
-        }
+        
     }
 })  
 
