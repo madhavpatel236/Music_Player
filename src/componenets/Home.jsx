@@ -10,7 +10,7 @@ import AudioCard from "./AudioCard";
 import { addPlaylist } from "../utils/Slice/userPlaylistSlice";
 import { Link } from "react-router-dom";
 import { showsongID } from "../utils/Slice/songIDSlice";
-
+import { showSongInfo } from "../utils/Slice/currentSongInfoSlice";
 
 function Home() {
   const dispatch = useDispatch();
@@ -20,9 +20,6 @@ function Home() {
   const currentPlaylist = useSelector(
     (store) => store.userPlaylists.userPlaylist
   );
-
-  const firstSongImg = currentPlaylist[0]?.href;
-  console.log(firstSongImg);
 
   const [playlistData, setPlaylistData] = useState([]);
   const [songs, setSongs] = useState([]);
@@ -64,25 +61,24 @@ function Home() {
   const playlistName = playlistData[0]?.name;
   // console.log(playlistName);
 
+  // highlight color for selected song
+
+  const [select, setSelect] = useSelector();
+
   useEffect(() => {
     data();
     fetchData();
   }, []);
 
-  // console.log(songs);
-  console.log(playlistData);
+  // ---------------------------------------------------------------------
 
-// ---------------------------------------------------------------------
+  //  for the mobile and tab music controll
 
-//  for the mobile and tab music controll
-
-const [musicIndex, setMusicIndex] = useState();
+  const [musicIndex, setMusicIndex] = useState();
   const [currentMusicIndex, setCurrentMusicIndex] = useState(false);
   const songInfo = useSelector((store) => store.currentSongInfo.apiData);
 
-  // console.log(currentMusic?.id)
-  // console.log(songInfo);
-  // console.log(currentPlaylist);
+  // console.log(songInfo)
 
   const handlePrevBtn = () => {
     const currentIndex = currentPlaylist.findIndex(
@@ -105,14 +101,17 @@ const [musicIndex, setMusicIndex] = useState();
     // console.log("index: " + musicIndex);
     dispatch(showSongInfo(currentPlaylist[nextIndex]));
   };
-    const currentMusic = useSelector((store) => store?.currentSongInfo?.apiData);
-  console.log(currentMusic);
+  const currentMusic = useSelector((store) => store?.currentSongInfo?.apiData);
   const currentMusicID = currentMusic?.id;
 
   dispatch(showsongID(currentMusicID));
 
+  const handleSong = (data) => {
+    dispatch(showSongInfo(data));
+  };
+  // console.log(songInfo?.name);
 
-// -----------------------------------------------------------------
+  // -----------------------------------------------------------------
   return (
     <div className="">
       {/* tablet and laptop screen  */}
@@ -164,28 +163,36 @@ const [musicIndex, setMusicIndex] = useState();
 
       {/* mobile screen */}
       <div className="md:hidden bg-red-800 flex flex-col pt-5 flex-wrap justify-start items-center gap-3 w-[100vw] min-h-[100vh]">
+        {/* playlist name */}
+        <article className="text-white mt-3 mb-2 font-bold text-2xl">
+          <div> Playlist- {playlistName}</div>
+        </article>
+
         {/* img */}
         <article className="w-60 h-60 mt-3">
           <img
-            src={firstSongImg?.album?.images[1]?.url || logo}
+            src={
+              songInfo?.album?.images[0].url || playlistData[0]?.images[1]?.url
+            }
             alt="photo"
             className="rounded-2xl"
           />
         </article>
 
-        {/* playlistName */}
-        <article className="text-white mt-3 mb-2 font-bold text-2xl">
-          <div>{playlistName}</div>
+        {/* song Name */}
+        <article className="text-white mt-3 mb-2 max-w-[90vw] text-center line-clamp-2 font-semibold text-xl">
+          <div>{songInfo?.name}</div>
         </article>
 
+        {/* next, prev btn */}
         <article className="flex justify-center gap-x-2 items-center align-middle w-screen mb-2 rounded-lg ">
-          <button>
+          <button onClick={handlePrevBtn}>
             <img src={prevBtn} className="w-14 h-14  " />
           </button>
           <button>
             <img src={pauseBtn} className="w-16 h-16 " />
           </button>
-          <button>
+          <button onClick={handlenextBtn}>
             <img src={nextBtn} className="w-14 h-14" />
           </button>
         </article>
@@ -193,11 +200,12 @@ const [musicIndex, setMusicIndex] = useState();
         {/* list of songs */}
         <article className="bg-red-950 p-3 flex flex-col h-auto rounded-xl text-white max-w-[90vw]">
           {songs.map((eachSong) => (
-            // console.log()
+            // console.log(songs)
 
             <button
+              onClick={() => handleSong(eachSong?.track)}
               key={eachSong?.track?.id}
-              className="flex bottom-0 gap-3 mb-4  "
+              className="flex bottom-0 gap-3 mb-4   "
             >
               <img
                 src={eachSong?.track?.album?.images[0].url}

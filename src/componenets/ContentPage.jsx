@@ -16,7 +16,7 @@ function ContentPage(playlist) {
   const songid = useSelector((store) => store.songID.ID);
   const token = useSelector((store) => store?.token?.tokenData);
   const songInfo = useSelector((store) => store.currentSongInfo.apiData);
-  console.log(songid);
+  // console.log(songid);
 
   const handleMusic = (id) => {
     fetchSongFromID();
@@ -65,12 +65,12 @@ function ContentPage(playlist) {
         >
           <div className="md:absolute md:inset-0  md:bg-opacity-50"></div>
           <div className="md:relative md:z-10 md:text-center">
-            <h1 className="md:text-6xl md:font-bold md:mb-4">
+            {/* <h1 className="md:text-6xl md:font-bold md:mb-4">
               {data?.playlist[0]?.name}
             </h1>
             <p className=" md:text-xl line-clamp-1">
               {data?.playlist[0]?.description}
-            </p>
+            </p> */}
           </div>
         </section>
       </section>

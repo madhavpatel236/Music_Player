@@ -3,6 +3,7 @@ import "../index.css";
 import logo from "../images/logo.png";
 import { Link } from "react-router-dom";
 import Home from "./Home";
+import comde from '../images/come.jpeg'
 
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -43,7 +44,7 @@ function Header() {
               {["Library", "Treanding", "setting", "Logout"].map((item) => (
                 <Link
                   key={item}
-                  to={`/${item}`}
+                  to='/commingsoon'
                   className="text-xl hover:text-gray-400"
                 >
                   {item}

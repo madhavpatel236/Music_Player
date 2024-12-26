@@ -41,7 +41,7 @@ function AudioCard() {
     dispatch(showSongInfo(currentPlaylist[nextIndex]));
   };
     const currentMusic = useSelector((store) => store?.currentSongInfo?.apiData);
-  console.log(currentMusic);
+  // console.log(currentMusic);
   const currentMusicID = currentMusic?.id;
 
   dispatch(showsongID(currentMusicID));
