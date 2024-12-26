@@ -96,7 +96,7 @@ function Home() {
     const currentIndex = currentPlaylist.findIndex(
       (currentPlaylist) => currentPlaylist.id === songInfo.id
     );
-    const nextIndex = currentIndex > 0 && currentIndex + 1; // Loop back to the last track if at the beginning
+    const nextIndex = currentIndex >= 0 && currentIndex + 1; // Loop back to the last track if at the beginning
     setMusicIndex(nextIndex);
     // console.log("index: " + musicIndex);
     dispatch(showSongInfo(currentPlaylist[nextIndex]));
